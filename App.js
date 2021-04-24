@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Alert, FlatList, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import AddTodo from './components/addTodo';
 import Header from './components/header';
 import TodoItem from './components/todoitem';
@@ -28,29 +28,34 @@ export default function App() {
           ...prevTodos
         ]
       });
-    }else{
+    } else {
       Alert.alert('OOPS!', 'Please enter more than 3 chars', [
-        {text: 'OK', onPress: ()=> console.log('alert closed')}
+        { text: 'OK', onPress: () => console.log('alert closed') }
       ]);
     }
   }
 
   return (
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.content}>
-        <AddTodo submitHandler={submitHandler} />
-        <View style={styles.list}>
-          <FlatList
-            data={todos}
-            renderItem={({ item }) => (
-              <TodoItem item={item} pressHandler={pressHandler} />
-            )}
-          />
+    <TouchableWithoutFeedback onPress={() => {
+      console.log('dimissed keyboard');
+      Keyboard.dismiss();
+    }}>
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.content}>
+          <AddTodo submitHandler={submitHandler} />
+          <View style={styles.list}>
+            <FlatList
+              data={todos}
+              renderItem={({ item }) => (
+                <TodoItem item={item} pressHandler={pressHandler} />
+              )}
+            />
+          </View>
         </View>
       </View>
-    </View>
-  );
+    </TouchableWithoutFeedback>
+  )
 }
 
 const styles = StyleSheet.create({
