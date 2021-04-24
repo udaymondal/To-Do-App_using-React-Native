@@ -1,6 +1,6 @@
 ﻿# To Dos App (Android && IOS) using-React-Native
  
- ###Features:
+ ### Features:
  1. Add to do things.
  2. Delete after finishing item
  3. Scroll and touch works perfectly
